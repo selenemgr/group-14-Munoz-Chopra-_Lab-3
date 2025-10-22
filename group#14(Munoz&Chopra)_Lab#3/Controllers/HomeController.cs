@@ -15,11 +15,12 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
+            {
+                return RedirectToAction("Login", "Account");
+            }
 
-        public IActionResult Privacy()
-        {
+            ViewBag.Username = HttpContext.Session.GetString("Username");
             return View();
         }
 

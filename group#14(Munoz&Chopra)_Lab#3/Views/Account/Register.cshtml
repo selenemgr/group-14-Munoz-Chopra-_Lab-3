@@ -1,0 +1,37 @@
+﻿@model group_14_Munoz_Chopra__Lab_3.Models.User
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+
+<form asp-action="Register" method="post">
+    <div>
+        <label>Username:</label>
+        <input asp-for="Username" required />
+    </div>
+    <div>
+        <label>Email:</label>
+        <input asp-for="Email" required />
+    </div>
+    <div>
+        <label>Password:</label>
+        <input asp-for="Password" type="password" required />
+    </div>
+    <div>
+        <label>Role:</label>
+        <select asp-for="Role" required>
+            <option value="listener">Listener</option>
+            <option value="podcaster">Podcaster</option>
+            <option value="admin">Admin</option>
+        </select>
+    </div>
+    <button type="submit">Register</button>
+</form>
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">@ViewBag.Error</p>
+}
+
+<p>Already have an account? <a asp-action="Login">Login here</a></p>

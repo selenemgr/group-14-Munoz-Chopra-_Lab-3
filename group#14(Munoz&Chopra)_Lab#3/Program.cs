@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using group_14_Munoz_Chopra__Lab_3.Data;
+
 namespace group_14_Munoz_Chopra__Lab_3
 {
     public class Program
@@ -8,6 +11,12 @@ namespace group_14_Munoz_Chopra__Lab_3
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // Add SQL Server DbContext
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddSession();
 
             var app = builder.Build();
 
@@ -24,6 +33,7 @@ namespace group_14_Munoz_Chopra__Lab_3
 
             app.UseRouting();
 
+            app.UseSession(); 
             app.UseAuthorization();
 
             app.MapControllerRoute(
