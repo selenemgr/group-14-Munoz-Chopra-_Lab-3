@@ -13,13 +13,11 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             _context = context;
         }
 
-        // GET: /Account/Login
         public IActionResult Login()
         {
             return View();
         }
 
-        // POST: /Account/Login
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
@@ -38,13 +36,11 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // GET: /Account/Register
         public IActionResult Register()
         {
             return View();
         }
 
-        // POST: /Account/Register
         [HttpPost]
         public IActionResult Register(User model)
         {
@@ -77,11 +73,15 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // GET: /Account/Logout
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Login");
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View(); 
         }
     }
 }

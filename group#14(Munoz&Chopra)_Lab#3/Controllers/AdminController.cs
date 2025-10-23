@@ -15,7 +15,6 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             _context = context;
         }
 
-        // ✅ Admin Dashboard
         public IActionResult Index()
         {
             var totalUsers = _context.Users.Count();
@@ -33,14 +32,13 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             ViewBag.TotalEpisodes = totalEpisodes;
             ViewBag.Top5 = top5;
 
-            return View(); // Views/Admin/Index.cshtml
+            return View(); 
         }
 
-        // ✅ Manage Users
         public IActionResult Users()
         {
             var users = _context.Users.ToList();
-            return View(users); // Views/Admin/Users.cshtml
+            return View(users);
         }
 
         [HttpPost]

@@ -25,7 +25,7 @@ namespace group_14_Munoz_Chopra__Lab_3.Filters
             // If not admin → forbid access
             if (user == null || !string.Equals(user.Role, "Admin", StringComparison.OrdinalIgnoreCase))
             {
-                context.Result = new ForbidResult();
+                context.Result = new RedirectToActionResult("AccessDenied", "Account", null);
                 return;
             }
 

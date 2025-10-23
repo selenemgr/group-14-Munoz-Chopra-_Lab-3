@@ -1,9 +1,14 @@
-C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\group#14(Munoz&Chopra)_Lab#3.exe
 C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\appsettings.Development.json
 C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\appsettings.json
 C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\group#14(Munoz&Chopra)_Lab#3.staticwebassets.runtime.json
 C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\group#14(Munoz&Chopra)_Lab#3.staticwebassets.endpoints.json
+C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\group#14(Munoz&Chopra)_Lab#3.exe
+C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\group#14(Munoz&Chopra)_Lab#3.deps.json
+C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\group#14(Munoz&Chopra)_Lab#3.runtimeconfig.json
+C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\group#14(Munoz&Chopra)_Lab#3.dll
+C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\group#14(Munoz&Chopra)_Lab#3.pdb
 C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\AWSSDK.Core.dll
+C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\AWSSDK.DynamoDBv2.dll
 C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\AWSSDK.Extensions.NETCore.Setup.dll
 C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\AWSSDK.S3.dll
 C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\Azure.Core.dll
@@ -151,10 +156,5 @@ C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz
 C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\obj\Debug\net8.0\group#14(Munoz&Chopra)_Lab#3.dll
 C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\obj\Debug\net8.0\refint\group#14(Munoz&Chopra)_Lab#3.dll
 C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\obj\Debug\net8.0\group#14(Munoz&Chopra)_Lab#3.pdb
-C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\group#14(Munoz&Chopra)_Lab#3.deps.json
-C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\group#14(Munoz&Chopra)_Lab#3.runtimeconfig.json
-C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\group#14(Munoz&Chopra)_Lab#3.dll
-C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\group#14(Munoz&Chopra)_Lab#3.pdb
 C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\obj\Debug\net8.0\group#14(Munoz&Chopra)_Lab#3.genruntimeconfig.cache
 C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\obj\Debug\net8.0\ref\group#14(Munoz&Chopra)_Lab#3.dll
-C:\0_Selene_Stuff\College\COMP Cloud\group#14(Munoz&Chopra)_Lab#3\group#14(Munoz&Chopra)_Lab#3\bin\Debug\net8.0\AWSSDK.DynamoDBv2.dll
