@@ -8,15 +8,17 @@
 
 <div class="mb-3">
     <audio controls style="width:100%;">
-        <source src="@Url.Action("Play", "Audio", new { url = Model.AudioFileURL })" type="audio/mpeg" />
+        <source src="@Url.Action("Play", "Audio", new { episodeId = Model.EpisodeID, url = Model.AudioFileURL })" type="audio/mpeg" />
         Your browser does not support the audio element.
     </audio>
 </div>
 
 <p><strong>Release Date:</strong> @Model.ReleaseDate.ToString("yyyy-MM-dd")</p>
 <p><strong>Duration:</strong> @Model.DurationMinutes minutes</p>
-<p><strong>Play Count:</strong> @Model.PlayCount</p>
-<p><strong>Number of Views:</strong> @Model.NumberOfViews</p>
+<div class="episode-stats mb-3">
+    <span class="badge bg-info">Views: @Model.NumberOfViews</span>
+    <span class="badge bg-success">Plays: @Model.PlayCount</span>
+</div>
 
 <h3>Comments</h3>
 

@@ -12,5 +12,7 @@ namespace group_14_Munoz_Chopra__Lab_3.Data
         public DbSet<Podcast> Podcasts { get; set; }
         public DbSet<Episode> Episodes { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
+        public DbSet<EpisodeUserInteraction> EpisodeUserInteractions { get; set; }
+
     }
 }

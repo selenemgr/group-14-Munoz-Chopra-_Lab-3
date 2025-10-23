@@ -30,9 +30,37 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             var episode = await _context.Episodes
                 .Include(e => e.Podcast)
                 .FirstOrDefaultAsync(e => e.EpisodeID == id);
-
             if (episode == null || episode.Podcast == null)
                 return NotFound();
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            if (user == null)
+                return RedirectToAction("Login", "Account");
+
+            // Check user interaction
+            var interaction = await _context.EpisodeUserInteractions
+                .FirstOrDefaultAsync(i => i.EpisodeID == episode.EpisodeID && i.UserID == user.UserID);
+
+            if (interaction == null)
+            {
+                interaction = new EpisodeUserInteraction
+                {
+                    EpisodeID = episode.EpisodeID,
+                    UserID = user.UserID,
+                    Viewed = true,
+                    Played = false
+                };
+                _context.EpisodeUserInteractions.Add(interaction);
+
+                episode.NumberOfViews += 1; 
+                await _context.SaveChangesAsync();
+            }
+            else if (!interaction.Viewed)
+            {
+                interaction.Viewed = true;
+                episode.NumberOfViews += 1;
+                await _context.SaveChangesAsync();
+            }
 
             // Query DynamoDB for comments related to episode
             var queryConfig = new QueryOperationConfig
