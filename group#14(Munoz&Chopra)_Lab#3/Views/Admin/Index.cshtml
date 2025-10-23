@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container py-5">
+    <!-- Dashboard Heading -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-primary mb-0">
+            <i class="bi bi-speedometer2 me-2"></i>Admin Dashboard
+        </h2>
+        <span class="text-muted">Welcome, Admin 👋</span>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="row g-3 mb-5">
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 text-center p-4 dashboard-card">
+                <h6 class="text-muted mb-1">Total Users</h6>
+                <h2 class="text-primary fw-bold mb-0">@ViewBag.TotalUsers</h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 text-center p-4 dashboard-card">
+                <h6 class="text-muted mb-1">Total Podcasts</h6>
+                <h2 class="text-success fw-bold mb-0">@ViewBag.TotalPodcasts</h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 text-center p-4 dashboard-card">
+                <h6 class="text-muted mb-1">Total Episodes</h6>
+                <h2 class="text-warning fw-bold mb-0">@ViewBag.TotalEpisodes</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top 5 Episodes -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">
+                <i class="bi bi-bar-chart-fill me-2"></i>Top 5 Episodes (by Views)
+            </h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            @if (ViewBag.Top5 != null && ((IEnumerable<dynamic>)ViewBag.Top5).Any())
+            {
+                @foreach (var episode in (IEnumerable<dynamic>)ViewBag.Top5)
+                {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span><i class="bi bi-music-note-beamed text-primary me-2"></i>@episode.Title</span>
+                                <span class="badge bg-primary rounded-pill">@episode.NumberOfViews</span>
+                            </li>
+                }
+            }
+            else
+            {
+                    <li class="list-group-item text-muted text-center">No episode data available.</li>
+            }
+        </ul>
+    </div>
+
+    <!-- Quick Navigation Buttons -->
+    <div class="d-flex flex-wrap gap-3">
+        <a class="btn btn-outline-primary" asp-action="Users">
+            <i class="bi bi-people"></i> Manage Users
+        </a>
+        <a class="btn btn-outline-success" asp-action="Episodes">
+            <i class="bi bi-music-note-list"></i> Manage Episodes
+        </a>
+        <a class="btn btn-outline-warning" asp-action="Popular">
+            <i class="bi bi-star"></i> Popular Episodes
+        </a>
+        <a class="btn btn-outline-secondary" asp-action="Recent">
+            <i class="bi bi-clock"></i> Recent Episodes
+        </a>
+    </div>
+</div>
+
+<!-- Optional Styling -->
+<style>
+    .dashboard-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        background-color: #fff;
+        border-radius: 10px;
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .list-group-item {
+        font-size: 1rem;
+    }
+
+    .list-group-item i {
+        font-size: 1.1rem;
+    }
+</style>

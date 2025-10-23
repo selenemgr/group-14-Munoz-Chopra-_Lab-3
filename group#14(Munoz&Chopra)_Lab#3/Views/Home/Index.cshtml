@@ -1,32 +1,55 @@
 ﻿@model IEnumerable<group_14_Munoz_Chopra__Lab_3.Models.ViewModels.PodcastViewModel>
+@{
+    ViewData["Title"] = "Podcasts";
+}
 
-<h2>Available Podcasts</h2>
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-primary">
+            <i class="bi bi-mic-fill me-2"></i>Available Podcasts
+        </h1>
+        <p class="text-muted">Explore engaging podcasts created by our community 🎧</p>
+    </div>
 
-@if (Model != null && Model.Any())
-{
-    <div class="row">
-        @foreach (var podcast in Model)
-        {
-            <div class="col-md-4 mb-3">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a class="card-title" asp-controller="Podcast" asp-action="Details" asp-route-id="@podcast.PodcastID">@podcast.Title</a>
-                        </h5>
-                        <p class="card-text">@podcast.Description</p>
-                        <p class="card-text">
-                            <small class="text-muted">Created by: @podcast.CreatorUsername</small>
-                        </p>
-                        <p class="card-text">
-                            <small class="text-muted">Subscribers: @podcast.SubscriberCount</small>
-                        </p>
+    @if (Model != null && Model.Any())
+    {
+        <div class="row g-4">
+            @foreach (var podcast in Model)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 rounded-4 hover-shadow transition">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <h5 class="card-title fw-bold">
+                                    <a asp-controller="Podcast" asp-action="Details" asp-route-id="@podcast.PodcastID"
+                                       class="text-decoration-none text-dark stretched-link">
+                                        @podcast.Title
+                                    </a>
+                                </h5>
+                                <p class="card-text text-muted small">@podcast.Description</p>
+                            </div>
+
+                            <div class="mt-3 pt-2 border-top small text-secondary">
+                                <p class="mb-1">
+                                    <i class="bi bi-person-circle text-primary me-1"></i>
+                                    Created by: <strong>@podcast.CreatorUsername</strong>
+                                </p>
+                                <p class="mb-0">
+                                    <i class="bi bi-people-fill text-success me-1"></i>
+                                    Subscribers: <strong>@podcast.SubscriberCount</strong>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
-    </div>
-}
-else
-{
-    <p>No podcasts available.</p>
-}
+            }
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <i class="bi bi-emoji-frown fs-1 text-muted"></i>
+            <p class="mt-3 text-muted fs-5">No podcasts available yet.</p>
+        </div>
+    }
+</div>
