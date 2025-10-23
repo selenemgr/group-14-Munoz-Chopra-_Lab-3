@@ -20,6 +20,7 @@ namespace group_14_Munoz_Chopra__Lab_3.Models
         public DateTime CreatedDate { get; set; }
 
 
-        public ICollection<Subscription> Subscriptions { get; set; }
+        public ICollection<Subscription> Subscriptions { get; set; } = new List<Subscription>();
+        public ICollection<Episode> Episodes { get; set; } = new List<Episode>();
     }
 }

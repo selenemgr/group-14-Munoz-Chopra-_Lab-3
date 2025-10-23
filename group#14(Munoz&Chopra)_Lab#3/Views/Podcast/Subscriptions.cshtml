@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<group_14_Munoz_Chopra__Lab_3.Models.ViewModels.PodcastViewModel>
 
-<h2>Available Podcasts</h2>
+<h2>My Subscriptions</h2>
 
 @if (Model != null && Model.Any())
 {
@@ -11,7 +11,9 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a class="card-title" asp-controller="Podcast" asp-action="Details" asp-route-id="@podcast.PodcastID">@podcast.Title</a>
+                            <a asp-controller="Podcast" asp-action="Details" asp-route-id="@podcast.PodcastID">
+                                @podcast.Title
+                            </a>
                         </h5>
                         <p class="card-text">@podcast.Description</p>
                         <p class="card-text">
@@ -28,5 +30,5 @@
 }
 else
 {
-    <p>No podcasts available.</p>
+    <p>You are not subscribed to any podcasts yet.</p>
 }

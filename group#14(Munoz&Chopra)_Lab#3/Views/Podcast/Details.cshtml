@@ -1,0 +1,53 @@
+﻿@model group_14_Munoz_Chopra__Lab_3.Models.ViewModels.PodcastDetailsViewModel
+
+<h2>@Model.Title</h2>
+
+<p>@Model.Description</p>
+<p><strong>Created by:</strong> @Model.CreatorUsername</p>
+<p><strong>Created on:</strong> @Model.CreatedDate.ToString("yyyy-MM-dd")</p>
+<p><strong>Subscribers:</strong> @Model.SubscriberCount</p>
+
+<form asp-action="Subscribe" asp-controller="Podcast" method="post">
+    <input type="hidden" name="podcastId" value="@Model.PodcastID" />
+    @if (Model.IsSubscribed)
+    {
+        <button type="submit" formaction="@Url.Action("Unsubscribe", "Podcast")" class="btn btn-danger">Unsubscribe</button>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+    }
+</form>
+
+<h3>Episodes</h3>
+
+@if (Model.Episodes != null && Model.Episodes.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Release Date</th>
+                <th>Duration (minutes)</th>
+                <th>Play Count</th>
+                <th>Number of Views</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var episode in Model.Episodes)
+            {
+                <tr>
+                    <td>@episode.Title</td>
+                    <td>@episode.ReleaseDate.ToString("yyyy-MM-dd")</td>
+                    <td>@episode.DurationMinutes</td>
+                    <td>@episode.PlayCount</td>
+                    <td>@episode.NumberOfViews</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No episodes available.</p>
+}
