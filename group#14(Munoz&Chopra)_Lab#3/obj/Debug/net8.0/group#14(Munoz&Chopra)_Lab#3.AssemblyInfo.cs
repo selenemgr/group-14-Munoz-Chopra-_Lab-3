@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("group#14(Munoz&Chopra)_Lab#3")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d522a589d5fae010c98efa40700b847baf5926f7")]
 [assembly: System.Reflection.AssemblyProductAttribute("group#14(Munoz&Chopra)_Lab#3")]
 [assembly: System.Reflection.AssemblyTitleAttribute("group#14(Munoz&Chopra)_Lab#3")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
