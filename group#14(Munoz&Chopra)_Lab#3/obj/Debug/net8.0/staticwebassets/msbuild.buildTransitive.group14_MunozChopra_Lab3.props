@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\group14_MunozChopra_Lab3.props" />
+</Project>

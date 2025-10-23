@@ -1,0 +1,42 @@
+﻿@model IEnumerable<group_14_Munoz_Chopra__Lab_3.Models.Episode>
+@{
+    ViewData["Title"] = "Recent Episodes";
+}
+
+<div class="container py-4">
+    <h2 class="fw-bold text-success mb-4">
+        <i class="bi bi-clock-history me-2"></i>Recent Episodes
+    </h2>
+
+    @if (Model == null || !Model.Any())
+    {
+            <div class="alert alert-info">No recent episodes found.</div>
+    }
+    else
+    {
+            <table class="table table-striped shadow-sm align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Title</th>
+                        <th>Podcast</th>
+                        <th>Host</th>
+                        <th>Release Date</th>
+                        <th>Views</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var episode in Model)
+                {
+                            <tr>
+                                <td>@episode.Title</td>
+                                <td>@episode.Podcast?.Title</td>
+                                <td>@episode.Podcast?.Creator?.Username</td>
+                                <td>@episode.ReleaseDate.ToShortDateString()</td>
+                                <td><span class="badge bg-success">@episode.NumberOfViews</span></td>
+                            </tr>
+                }
+                </tbody>
+            </table>
+    }
+</div>
+

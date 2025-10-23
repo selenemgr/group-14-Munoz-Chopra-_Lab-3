@@ -1,57 +1,98 @@
 ﻿@model group_14_Munoz_Chopra__Lab_3.Models.ViewModels.PodcastDetailsViewModel
+@{
+    ViewData["Title"] = "Podcast Details";
+}
 
-<h2>@Model.Title</h2>
+<div class="container py-5">
+    <!-- Back Button -->
+    <a asp-controller="Podcast" asp-action="Index" class="btn btn-outline-secondary mb-4">
+        <i class="bi bi-arrow-left-circle"></i> Back to All Podcasts
+    </a>
 
-<p>@Model.Description</p>
-<p><strong>Created by:</strong> @Model.CreatorUsername</p>
-<p><strong>Created on:</strong> @Model.CreatedDate.ToString("yyyy-MM-dd")</p>
-<p><strong>Subscribers:</strong> @Model.SubscriberCount</p>
+    <!-- Podcast Header Card -->
+    <div class="card shadow-sm border-0 rounded-4 mb-5">
+        <div class="card-body">
+            <h2 class="fw-bold text-primary mb-2">@Model.Title</h2>
+            <p class="text-muted">@Model.Description</p>
 
-<form asp-action="Subscribe" asp-controller="Podcast" method="post">
-    <input type="hidden" name="podcastId" value="@Model.PodcastID" />
-    @if (Model.IsSubscribed)
-    {
-        <button type="submit" formaction="@Url.Action("Unsubscribe", "Podcast")" class="btn btn-danger">Unsubscribe</button>
-    }
-    else
-    {
-        <button type="submit" class="btn btn-primary">Subscribe</button>
-    }
-</form>
+            <div class="d-flex flex-wrap gap-3 mt-3">
+                <div class="badge bg-light text-dark border">
+                    <i class="bi bi-person-circle me-1 text-primary"></i> Created by: <strong>@Model.CreatorUsername</strong>
+                </div>
+                <div class="badge bg-light text-dark border">
+                    <i class="bi bi-calendar3 me-1 text-success"></i> Created on: @Model.CreatedDate.ToString("yyyy-MM-dd")
+                </div>
+                <div class="badge bg-light text-dark border">
+                    <i class="bi bi-people-fill me-1 text-info"></i> Subscribers: <strong>@Model.SubscriberCount</strong>
+                </div>
+            </div>
 
-<h3>Episodes</h3>
+            <!-- Subscribe/Unsubscribe Button -->
+            <form asp-action="Subscribe" asp-controller="Podcast" method="post" class="mt-4">
+                <input type="hidden" name="podcastId" value="@Model.PodcastID" />
+                @if (Model.IsSubscribed)
+                {
+                        <button type="submit" formaction="@Url.Action("Unsubscribe", "Podcast")" 
+                                class="btn btn-outline-danger rounded-pill px-4">
+                            <i class="bi bi-x-circle me-1"></i> Unsubscribe
+                        </button>
+                }
+                else
+                {
+                        <button type="submit" class="btn btn-primary rounded-pill px-4">
+                            <i class="bi bi-plus-circle me-1"></i> Subscribe
+                        </button>
+                }
+            </form>
+        </div>
+    </div>
 
-@if (Model.Episodes != null && Model.Episodes.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Release Date</th>
-                <th>Duration (minutes)</th>
-                <th>Play Count</th>
-                <th>Number of Views</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var episode in Model.Episodes)
+    <!-- Episodes Section -->
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body">
+            <h4 class="fw-bold text-primary mb-4">
+                <i class="bi bi-list-music me-2"></i> Episodes
+            </h4>
+
+            @if (Model.Episodes != null && Model.Episodes.Any())
             {
-                <tr>
-                    <td>@episode.Title</td>
-                    <td>@episode.ReleaseDate.ToString("yyyy-MM-dd")</td>
-                    <td>@episode.DurationMinutes</td>
-                    <td>@episode.PlayCount</td>
-                    <td>@episode.NumberOfViews</td>
-                    <td>
-                        <a asp-controller="Episode" asp-action="Details" asp-route-id="@episode.EpisodeID" class="btn btn-primary mt-3">View</a>
-                    </td>
-                </tr>
+                    <div class="table-responsive">
+                        <table class="table align-middle table-hover">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Release Date</th>
+                                    <th>Duration (min)</th>
+                                    <th>Play Count</th>
+                                    <th>Views</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var episode in Model.Episodes)
+                            {
+                                        <tr>
+                                            <td class="fw-semibold">@episode.Title</td>
+                                            <td>@episode.ReleaseDate.ToString("yyyy-MM-dd")</td>
+                                            <td>@episode.DurationMinutes</td>
+                                            <td>@episode.PlayCount</td>
+                                            <td>@episode.NumberOfViews</td>
+                                            <td class="text-center">
+                                                <a asp-controller="Episode" asp-action="Details" asp-route-id="@episode.EpisodeID"
+                                                   class="btn btn-outline-primary btn-sm rounded-pill">
+                                                    <i class="bi bi-play-circle me-1"></i> View
+                                                </a>
+                                            </td>
+                                        </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
             }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>No episodes available.</p>
-}
+            else
+            {
+                    <p class="text-muted fst-italic">No episodes available for this podcast yet.</p>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<group_14_Munoz_Chopra__Lab_3.Models.ViewModels.PodcastViewModel>
+@{
+    ViewData["Title"] = "Available Podcasts";
+}
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-primary">
+            <i class="bi bi-mic-fill me-2"></i>Available Podcasts
+        </h1>
+        <p class="text-muted">Explore engaging podcasts created by our amazing community 🎧</p>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+            <div class="row g-4">
+            @foreach (var podcast in Model)
+            {
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 shadow-sm border-0 rounded-4 hover-shadow transition">
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title fw-bold">
+                                            <a asp-controller="Podcast" asp-action="Details" asp-route-id="@podcast.PodcastID"
+                                               class="text-decoration-none text-dark stretched-link">
+                                        @podcast.Title
+                                            </a>
+                                        </h5>
+                                        <p class="card-text text-muted small">@podcast.Description</p>
+                                    </div>
+
+                                    <div class="mt-3 pt-2 border-top small text-secondary">
+                                        <p class="mb-1">
+                                            <i class="bi bi-person-circle text-primary me-1"></i>
+                                            Created by: <strong>@podcast.CreatorUsername</strong>
+                                        </p>
+                                        <p class="mb-0">
+                                            <i class="bi bi-people-fill text-success me-1"></i>
+                                            Subscribers: <strong>@podcast.SubscriberCount</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            }
+            </div>
+    }
+    else
+    {
+            <div class="text-center py-5">
+                <i class="bi bi-emoji-frown fs-1 text-muted"></i>
+                <p class="mt-3 text-muted fs-5">No podcasts available yet.</p>
+            </div>
+    }
+</div>
+
+<style>
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease-in-out;
+    }
+</style>
+
