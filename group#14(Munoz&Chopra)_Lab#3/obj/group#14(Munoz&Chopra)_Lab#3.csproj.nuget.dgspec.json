@@ -51,6 +51,18 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AWSSDK.DynamoDBv2": {
+              "target": "Package",
+              "version": "[4.0.9, )"
+            },
+            "AWSSDK.Extensions.NETCore.Setup": {
+              "target": "Package",
+              "version": "[4.0.3.7, )"
+            },
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[4.0.7.13, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.10, )"

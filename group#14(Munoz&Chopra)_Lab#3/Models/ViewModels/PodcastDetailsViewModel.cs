@@ -8,6 +8,7 @@
         public int DurationMinutes { get; set; }
         public int PlayCount { get; set; }
         public int NumberOfViews { get; set; }
+        public string AudioFileURL { get; set; } = string.Empty;
     }
 
     public class PodcastDetailsViewModel

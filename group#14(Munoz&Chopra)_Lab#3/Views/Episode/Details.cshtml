@@ -1,0 +1,38 @@
+﻿@model group_14_Munoz_Chopra__Lab_3.Models.ViewModels.EpisodeDetailsViewModel
+
+<a asp-controller="Podcast" asp-action="Details" asp-route-id="@Model.PodcastID" class="btn btn-secondary mt-3">
+    &larr; Back to @Model.PodcastTitle
+</a>
+
+<h2>@Model.Title</h2>
+
+<div class="mb-3">
+    <audio controls style="width:100%;">
+        <source src="@Url.Action("Play", "Audio", new { url = Model.AudioFileURL })" type="audio/mpeg" />
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+<p><strong>Release Date:</strong> @Model.ReleaseDate.ToString("yyyy-MM-dd")</p>
+<p><strong>Duration:</strong> @Model.DurationMinutes minutes</p>
+<p><strong>Play Count:</strong> @Model.PlayCount</p>
+<p><strong>Number of Views:</strong> @Model.NumberOfViews</p>
+
+<h3>Comments</h3>
+
+<form asp-action="AddComment" method="post">
+    <input type="hidden" name="episodeId" value="@Model.EpisodeID" />
+    <textarea name="text" class="form-control" placeholder="Add a comment..." required></textarea>
+    <button type="submit" class="btn btn-primary mt-2">Post Comment</button>
+</form>
+
+<div class="mt-3">
+    @foreach (var comment in Model.Comments)
+    {
+        <div class="border p-2 mb-2">
+            <strong>@comment.Username</strong> <small class="text-muted">@comment.Timestamp.ToLocalTime()</small>
+            <p>@comment.Text</p>
+        </div>
+    }
+</div>
+

@@ -51,7 +51,8 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
                     ReleaseDate = e.ReleaseDate,
                     DurationMinutes = e.DurationMinutes,
                     PlayCount = e.PlayCount,
-                    NumberOfViews = e.NumberOfViews
+                    NumberOfViews = e.NumberOfViews,
+                    AudioFileURL = e.AudioFileURL
                 }).ToList()
             };
 

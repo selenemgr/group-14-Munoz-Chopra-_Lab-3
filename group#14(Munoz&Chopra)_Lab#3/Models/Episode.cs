@@ -4,11 +4,14 @@
     {
         public int EpisodeID { get; set; }
         public int PodcastID { get; set; }
+        public Podcast Podcast { get; set; }
         public string Title { get; set; }
         public DateTime ReleaseDate { get; set; }
         public int DurationMinutes { get; set; }
         public int PlayCount { get; set; }
         public string AudioFileURL { get; set; }
         public int NumberOfViews { get; set; }
+
+        
     }
 }

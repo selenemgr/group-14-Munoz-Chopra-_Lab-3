@@ -1,9 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "TL+Nj+ZGcj4=",
+  "dgSpecHash": "y1MZHtXrel0=",
   "success": true,
   "projectFilePath": "C:\\0_Selene_Stuff\\College\\COMP Cloud\\group#14(Munoz&Chopra)_Lab#3\\group#14(Munoz&Chopra)_Lab#3\\group#14(Munoz&Chopra)_Lab#3.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\sm111567\\.nuget\\packages\\awssdk.core\\4.0.1.1\\awssdk.core.4.0.1.1.nupkg.sha512",
+    "C:\\Users\\sm111567\\.nuget\\packages\\awssdk.dynamodbv2\\4.0.9\\awssdk.dynamodbv2.4.0.9.nupkg.sha512",
+    "C:\\Users\\sm111567\\.nuget\\packages\\awssdk.extensions.netcore.setup\\4.0.3.7\\awssdk.extensions.netcore.setup.4.0.3.7.nupkg.sha512",
+    "C:\\Users\\sm111567\\.nuget\\packages\\awssdk.s3\\4.0.7.13\\awssdk.s3.4.0.7.13.nupkg.sha512",
     "C:\\Users\\sm111567\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\sm111567\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\sm111567\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

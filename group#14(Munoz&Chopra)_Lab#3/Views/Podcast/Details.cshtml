@@ -31,6 +31,7 @@
                 <th>Duration (minutes)</th>
                 <th>Play Count</th>
                 <th>Number of Views</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -42,6 +43,9 @@
                     <td>@episode.DurationMinutes</td>
                     <td>@episode.PlayCount</td>
                     <td>@episode.NumberOfViews</td>
+                    <td>
+                        <a asp-controller="Episode" asp-action="Details" asp-route-id="@episode.EpisodeID" class="btn btn-primary mt-3">View</a>
+                    </td>
                 </tr>
             }
         </tbody>

@@ -1,5 +1,11 @@
-using Microsoft.EntityFrameworkCore;
+using Amazon;
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DataModel;
+using Amazon.Extensions.NETCore.Setup;
+using Amazon.Runtime;
+using Amazon.S3;
 using group_14_Munoz_Chopra__Lab_3.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace group_14_Munoz_Chopra__Lab_3
 {
@@ -18,13 +24,34 @@ namespace group_14_Munoz_Chopra__Lab_3
 
             builder.Services.AddSession();
 
+            // Add AWS S3 service
+            var awsSection = builder.Configuration.GetSection("AWS");
+            var awsOptions = new AWSOptions
+            {
+                Credentials = new BasicAWSCredentials(
+                    awsSection["AccessKey"],
+                    awsSection["SecretKey"]
+                ),
+                Region = RegionEndpoint.GetBySystemName(awsSection["Region"])
+            };
+
+            builder.Services.AddDefaultAWSOptions(awsOptions);
+            builder.Services.AddAWSService<IAmazonS3>();
+
+            // Add AWS DynamoDB service
+            builder.Services.AddAWSService<IAmazonDynamoDB>();
+            builder.Services.AddSingleton<IDynamoDBContext>(sp =>
+            {
+                var client = sp.GetRequiredService<IAmazonDynamoDB>();
+                return new DynamoDBContext(client);
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
