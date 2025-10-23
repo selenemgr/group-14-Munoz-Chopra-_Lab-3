@@ -23,6 +23,7 @@ namespace group_14_Munoz_Chopra__Lab_3
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddSession();
+            builder.Services.AddHttpContextAccessor();
 
             // Add AWS S3 service
             var awsSection = builder.Configuration.GetSection("AWS");
