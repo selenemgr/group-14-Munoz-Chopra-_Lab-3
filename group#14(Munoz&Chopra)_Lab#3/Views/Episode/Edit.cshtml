@@ -1,0 +1,31 @@
+﻿@model group_14_Munoz_Chopra__Lab_3.Models.Episode
+@{
+    ViewData["Title"] = "Edit Episode";
+}
+
+<div class="container mt-4">
+    <h2 class="fw-bold text-primary mb-4">Edit Episode</h2>
+
+    <form asp-action="Edit" enctype="multipart/form-data" method="post">
+        <input type="hidden" asp-for="EpisodeID" />
+
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input asp-for="Title" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Duration (mins)</label>
+            <input asp-for="DurationMinutes" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Upload New Audio (optional)</label>
+            <input type="file" name="audioFile" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Update Episode</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+

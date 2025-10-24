@@ -1,5 +1,4 @@
 ﻿using Amazon.DynamoDBv2.DataModel;
-using Amazon.DynamoDBv2.DocumentModel;
 using group_14_Munoz_Chopra__Lab_3.Data;
 using group_14_Munoz_Chopra__Lab_3.Models;
 using group_14_Munoz_Chopra__Lab_3.Models.ViewModels;
@@ -19,14 +18,28 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             _dbContext = dbContext;
         }
 
+        // =========================================================
+        // SHOW ALL EPISODES
+        // =========================================================
+        public async Task<IActionResult> Index()
+        {
+            var episodes = await _context.Episodes
+                .Include(e => e.Podcast)
+                .OrderByDescending(e => e.ReleaseDate)
+                .ToListAsync();
+
+            return View(episodes);
+        }
+
+        // =========================================================
+        // EPISODE DETAILS (with comments)
+        // =========================================================
         public async Task<IActionResult> Details(int id)
         {
-            // Check if user is logged in
             var username = HttpContext.Session.GetString("Username");
             if (string.IsNullOrEmpty(username))
                 return RedirectToAction("Login", "Account");
 
-            // Retrieve episode from SQL database
             var episode = await _context.Episodes
                 .Include(e => e.Podcast)
                 .FirstOrDefaultAsync(e => e.EpisodeID == id);
@@ -34,32 +47,20 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             if (episode == null || episode.Podcast == null)
                 return NotFound();
 
-            // Query DynamoDB for comments related to episode
-            var queryConfig = new QueryOperationConfig
-            {
-                IndexName = "EpisodeID-index",
-                KeyExpression = new Expression
-                {
-                    ExpressionStatement = "EpisodeID = :v_episodeId",
-                    ExpressionAttributeValues = new Dictionary<string, DynamoDBEntry>
-                    {
-                        { ":v_episodeId", episode.EpisodeID }
-                    }
-                },
-                BackwardSearch = true 
-            };
+            // ✅ Fetch comments from DynamoDB by EpisodeID
+            // ✅ Safer DynamoDB fetch (works even if EpisodeID isn’t the hash key)
+            var comments = await _dbContext.ScanAsync<Comment>(
+                new List<ScanCondition> {
+        new ScanCondition("EpisodeID", Amazon.DynamoDBv2.DocumentModel.ScanOperator.Equal, episode.EpisodeID)
+                }).GetRemainingAsync();
 
-            var search = _dbContext.FromQueryAsync<Comment>(queryConfig);
-            var comments = await search.GetRemainingAsync();
 
-            // Get all user IDs from comments
             var userIds = comments.Select(c => c.UserID).Distinct().ToList();
-
             var users = await _context.Users
                 .Where(u => userIds.Contains(u.UserID))
                 .ToDictionaryAsync(u => u.UserID, u => u.Username);
 
-            var userComment = comments.Select(c => new CommentViewModel
+            var commentVM = comments.Select(c => new CommentViewModel
             {
                 CommentID = c.CommentID,
                 EpisodeID = c.EpisodeID,
@@ -80,31 +81,28 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
                 NumberOfViews = episode.NumberOfViews,
                 PodcastID = episode.Podcast.PodcastID,
                 PodcastTitle = episode.Podcast.Title,
-                Comments = userComment
+                Comments = commentVM
             };
 
             return View(model);
         }
 
+        // =========================================================
+        // ADD COMMENT (DynamoDB)
+        // =========================================================
         [HttpPost]
         public async Task<IActionResult> AddComment(int episodeId, string text)
         {
-            // Check if user is logged in
             var username = HttpContext.Session.GetString("Username");
             if (string.IsNullOrEmpty(username))
                 return RedirectToAction("Login", "Account");
 
-            // Get the logged-in user
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
-            if (user == null)
-                return BadRequest("User not found.");
+            if (user == null) return BadRequest("User not found.");
 
-            // Get the episode to ensure it exists
             var episode = await _context.Episodes.FirstOrDefaultAsync(e => e.EpisodeID == episodeId);
-            if (episode == null)
-                return NotFound();
+            if (episode == null) return NotFound();
 
-            // Create the DynamoDB comment object
             var comment = new Comment
             {
                 CommentID = new Random().Next(1, int.MaxValue),
@@ -116,9 +114,159 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             };
 
             await _dbContext.SaveAsync(comment);
+            return RedirectToAction("Details", new { id = episodeId });
+        }
+
+        // =========================================================
+        // ✅ EDIT COMMENT (within 24 hours)
+        // =========================================================
+        [HttpPost]
+        public async Task<IActionResult> EditComment(int commentId, int episodeId, string text)
+        {
+            var username = HttpContext.Session.GetString("Username");
+            if (string.IsNullOrEmpty(username))
+                return RedirectToAction("Login", "Account");
+
+            // find the current user
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            if (user == null) return BadRequest("User not found.");
+
+            // load the comment from DynamoDB
+            var comment = await _dbContext.LoadAsync<Comment>(commentId, episodeId);
+            if (comment == null) return NotFound();
+
+            // allow editing only if same user and within 24 hours
+            if (comment.UserID == user.UserID && (DateTime.UtcNow - comment.Timestamp).TotalHours <= 24)
+            {
+                comment.Text = text;
+                await _dbContext.SaveAsync(comment);
+                TempData["Message"] = "✅ Comment updated successfully.";
+            }
+            else
+            {
+                TempData["Message"] = "❌ Comment can no longer be edited (24-hour limit).";
+            }
 
             return RedirectToAction("Details", new { id = episodeId });
         }
 
+        // =========================================================
+        // CREATE EPISODE
+        // =========================================================
+        [HttpGet]
+        public IActionResult Create(int? podcastId)
+        {
+            ViewBag.Podcasts = _context.Podcasts.ToList();
+
+            var episode = new Episode();
+            if (podcastId.HasValue)
+            {
+                episode.PodcastID = podcastId.Value;
+            }
+
+            return View(episode);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Episode episode, IFormFile? audioFile)
+        {
+            if (audioFile != null && audioFile.Length > 0)
+            {
+                Directory.CreateDirectory("wwwroot/uploads");
+                var filePath = Path.Combine("wwwroot/uploads", Path.GetFileName(audioFile.FileName));
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await audioFile.CopyToAsync(stream);
+                }
+                episode.AudioFileURL = "/uploads/" + Path.GetFileName(audioFile.FileName);
+            }
+
+            episode.ReleaseDate = DateTime.UtcNow;
+            episode.PlayCount = 0;
+            episode.NumberOfViews = 0;
+
+            _context.Episodes.Add(episode);
+            await _context.SaveChangesAsync();
+
+            // ✅ Redirect to the podcast’s details page
+            return RedirectToAction("Details", "Podcast", new { id = episode.PodcastID });
+        }
+
+        // =========================================================
+        // EDIT EPISODE
+        // =========================================================
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var episode = await _context.Episodes.FindAsync(id);
+            if (episode == null) return NotFound();
+
+            ViewBag.Podcasts = _context.Podcasts.ToList();
+            return View(episode);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Episode updated, IFormFile? audioFile)
+        {
+            if (id != updated.EpisodeID) return BadRequest();
+
+            var episode = await _context.Episodes.FindAsync(id);
+            if (episode == null) return NotFound();
+
+            episode.Title = updated.Title;
+            episode.DurationMinutes = updated.DurationMinutes;
+            episode.ReleaseDate = updated.ReleaseDate;
+
+            if (audioFile != null && audioFile.Length > 0)
+            {
+                Directory.CreateDirectory("wwwroot/uploads");
+                var filePath = Path.Combine("wwwroot/uploads", Path.GetFileName(audioFile.FileName));
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await audioFile.CopyToAsync(stream);
+                }
+                episode.AudioFileURL = "/uploads/" + Path.GetFileName(audioFile.FileName);
+            }
+
+            await _context.SaveChangesAsync();
+
+            // ✅ Redirect back to podcast details
+            return RedirectToAction("Details", "Podcast", new { id = episode.PodcastID });
+        }
+
+        // =========================================================
+        // DELETE EPISODE
+        // =========================================================
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var episode = await _context.Episodes.FindAsync(id);
+            if (episode == null) return NotFound();
+
+            var podcastId = episode.PodcastID;
+
+            _context.Episodes.Remove(episode);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", "Podcast", new { id = podcastId });
+        }
+
+        // =========================================================
+        // INCREMENT VIEW COUNT
+        // =========================================================
+        [HttpPost]
+        public async Task<IActionResult> IncrementViews(int id)
+        {
+            var episode = await _context.Episodes.FindAsync(id);
+            if (episode == null) return NotFound();
+
+            episode.NumberOfViews++;
+            await _context.SaveChangesAsync();
+
+            return Ok(episode.NumberOfViews);
+        }
     }
 }

@@ -1,6 +1,9 @@
 ﻿@model group_14_Munoz_Chopra__Lab_3.Models.ViewModels.EpisodeDetailsViewModel
+@inject IHttpContextAccessor HttpContextAccessor
+
 @{
     ViewData["Title"] = "Episode Details";
+    var currentUser = HttpContextAccessor.HttpContext?.Session.GetString("Username");
 }
 
 <div class="container py-5">
@@ -50,6 +53,15 @@
                 <i class="bi bi-chat-left-dots-fill text-primary me-2"></i> Comments
             </h4>
 
+            <!-- ✅ Feedback Alert -->
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["Message"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
             <!-- Comment Form -->
             <form asp-action="AddComment" method="post" class="mb-4">
                 <input type="hidden" name="episodeId" value="@Model.EpisodeID" />
@@ -62,23 +74,51 @@
             <!-- Comments List -->
             @if (Model.Comments != null && Model.Comments.Any())
             {
-                    <div class="list-group">
+                <div class="list-group">
                     @foreach (var comment in Model.Comments)
                     {
-                                <div class="list-group-item border-0 border-bottom mb-2">
-                                    <div class="d-flex justify-content-between">
-                                        <strong class="text-dark">@comment.Username</strong>
-                                        <small class="text-muted">@comment.Timestamp.ToLocalTime()</small>
-                                    </div>
-                                    <p class="mt-1 mb-0 text-secondary">@comment.Text</p>
-                                </div>
+                        var canEdit = (comment.Username == currentUser && (DateTime.UtcNow - comment.Timestamp).TotalHours <= 24);
+
+                        <div class="list-group-item border-0 border-bottom mb-2">
+                            <div class="d-flex justify-content-between">
+                                <strong class="text-dark">@comment.Username</strong>
+                                <small class="text-muted">@comment.Timestamp.ToLocalTime().ToString("MMM dd, yyyy hh:mm tt")</small>
+                            </div>
+
+                            <p class="mt-1 mb-0 text-secondary">@comment.Text</p>
+
+                            @if (canEdit)
+                            {
+                                <form asp-action="EditComment" method="post" class="mt-2 d-flex">
+                                    <input type="hidden" name="commentId" value="@comment.CommentID" />
+                                    <input type="hidden" name="episodeId" value="@Model.EpisodeID" />
+                                    <input name="text" class="form-control me-2" value="@comment.Text" />
+                                    <button type="submit" class="btn btn-sm btn-outline-success">
+                                        <i class="bi bi-check-circle me-1"></i> Save
+                                    </button>
+                                </form>
+                            }
+                        </div>
                     }
-                    </div>
+                </div>
             }
             else
             {
-                    <p class="text-muted fst-italic">No comments yet. Be the first to share your thoughts!</p>
+                <p class="text-muted fst-italic">No comments yet. Be the first to share your thoughts!</p>
             }
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <!-- ✅ Auto-hide alert after 4 seconds -->
+    <script>
+        setTimeout(() => {
+            const alert = document.querySelector('.alert-success');
+            if (alert) {
+                alert.classList.remove('show');
+                setTimeout(() => alert.remove(), 300);
+            }
+        }, 4000);
+    </script>
+}

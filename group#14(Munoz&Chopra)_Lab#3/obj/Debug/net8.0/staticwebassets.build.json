@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ylR6pZxG+Ae6NH/9t0FUi7Q8vc/4OcdhNX1d9x1YYhc=",
+  "Hash": "buPbgadgPneGdYChnnv6bMmtClAzFjsvHrj7nJTt1A4=",
   "Source": "group14_MunozChopra_Lab3",
   "BasePath": "_content/group14_MunozChopra_Lab3",
   "Mode": "Default",
@@ -1359,6 +1359,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\schop\\OneDrive\\Documents\\Downloads\\group-14-Munoz-Chopra-_Lab-3-main\\group-14-Munoz-Chopra-_Lab-3-main\\group#14(Munoz&Chopra)_Lab#3\\wwwroot\\uploads\\133881194087554392.jpg",
+      "SourceId": "group14_MunozChopra_Lab3",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\schop\\OneDrive\\Documents\\Downloads\\group-14-Munoz-Chopra-_Lab-3-main\\group-14-Munoz-Chopra-_Lab-3-main\\group#14(Munoz&Chopra)_Lab#3\\wwwroot\\",
+      "BasePath": "_content/group14_MunozChopra_Lab3",
+      "RelativePath": "uploads/133881194087554392#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "btb9sh7m6h",
+      "Integrity": "8etJI7azGkbm4MJz6KJHHg+zL/0scMoCgOwlSdpd/PY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\133881194087554392.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\schop\\OneDrive\\Documents\\Downloads\\group-14-Munoz-Chopra-_Lab-3-main\\group-14-Munoz-Chopra-_Lab-3-main\\group#14(Munoz&Chopra)_Lab#3\\wwwroot\\uploads\\133887342608494969.jpg",
+      "SourceId": "group14_MunozChopra_Lab3",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\schop\\OneDrive\\Documents\\Downloads\\group-14-Munoz-Chopra-_Lab-3-main\\group-14-Munoz-Chopra-_Lab-3-main\\group#14(Munoz&Chopra)_Lab#3\\wwwroot\\",
+      "BasePath": "_content/group14_MunozChopra_Lab3",
+      "RelativePath": "uploads/133887342608494969#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ybwl9gysa5",
+      "Integrity": "EmAyfH62DwzfZGr3i/jWL7hHiKJRQK+6xyZG8ovhOX0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\133887342608494969.jpg"
     }
   ],
   "Endpoints": [
@@ -6607,6 +6649,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-z8IfXovWVa6ZfuyRYTi3B7HSkLgycsAqlcn4IbjIcxA="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/133881194087554392.btb9sh7m6h.jpg",
+      "AssetFile": "C:\\Users\\schop\\OneDrive\\Documents\\Downloads\\group-14-Munoz-Chopra-_Lab-3-main\\group-14-Munoz-Chopra-_Lab-3-main\\group#14(Munoz&Chopra)_Lab#3\\wwwroot\\uploads\\133881194087554392.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2119071"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8etJI7azGkbm4MJz6KJHHg+zL/0scMoCgOwlSdpd/PY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 24 Oct 2025 02:06:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "btb9sh7m6h"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/133881194087554392.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-8etJI7azGkbm4MJz6KJHHg+zL/0scMoCgOwlSdpd/PY="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/133881194087554392.jpg",
+      "AssetFile": "C:\\Users\\schop\\OneDrive\\Documents\\Downloads\\group-14-Munoz-Chopra-_Lab-3-main\\group-14-Munoz-Chopra-_Lab-3-main\\group#14(Munoz&Chopra)_Lab#3\\wwwroot\\uploads\\133881194087554392.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2119071"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8etJI7azGkbm4MJz6KJHHg+zL/0scMoCgOwlSdpd/PY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 24 Oct 2025 02:06:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-8etJI7azGkbm4MJz6KJHHg+zL/0scMoCgOwlSdpd/PY="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/133887342608494969.jpg",
+      "AssetFile": "C:\\Users\\schop\\OneDrive\\Documents\\Downloads\\group-14-Munoz-Chopra-_Lab-3-main\\group-14-Munoz-Chopra-_Lab-3-main\\group#14(Munoz&Chopra)_Lab#3\\wwwroot\\uploads\\133887342608494969.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2232696"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EmAyfH62DwzfZGr3i/jWL7hHiKJRQK+6xyZG8ovhOX0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 24 Oct 2025 02:06:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-EmAyfH62DwzfZGr3i/jWL7hHiKJRQK+6xyZG8ovhOX0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/133887342608494969.ybwl9gysa5.jpg",
+      "AssetFile": "C:\\Users\\schop\\OneDrive\\Documents\\Downloads\\group-14-Munoz-Chopra-_Lab-3-main\\group-14-Munoz-Chopra-_Lab-3-main\\group#14(Munoz&Chopra)_Lab#3\\wwwroot\\uploads\\133887342608494969.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2232696"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EmAyfH62DwzfZGr3i/jWL7hHiKJRQK+6xyZG8ovhOX0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 24 Oct 2025 02:06:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ybwl9gysa5"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/133887342608494969.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-EmAyfH62DwzfZGr3i/jWL7hHiKJRQK+6xyZG8ovhOX0="
         }
       ]
     }

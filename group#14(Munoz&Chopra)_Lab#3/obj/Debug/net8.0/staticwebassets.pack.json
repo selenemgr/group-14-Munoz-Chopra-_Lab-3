@@ -253,6 +253,14 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\schop\\OneDrive\\Documents\\Downloads\\group-14-Munoz-Chopra-_Lab-3-main\\group-14-Munoz-Chopra-_Lab-3-main\\group#14(Munoz&Chopra)_Lab#3\\wwwroot\\uploads\\133881194087554392.jpg",
+      "PackagePath": "staticwebassets\\uploads\\133881194087554392.jpg"
+    },
+    {
+      "Id": "C:\\Users\\schop\\OneDrive\\Documents\\Downloads\\group-14-Munoz-Chopra-_Lab-3-main\\group-14-Munoz-Chopra-_Lab-3-main\\group#14(Munoz&Chopra)_Lab#3\\wwwroot\\uploads\\133887342608494969.jpg",
+      "PackagePath": "staticwebassets\\uploads\\133887342608494969.jpg"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.group14_MunozChopra_Lab3.props",
       "PackagePath": "build\\group14_MunozChopra_Lab3.props"
     },

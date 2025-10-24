@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<div class="container text-center py-5">
+    <img src="~/images/lock.svg" alt="Access Denied" style="width: 90px;" class="mb-3" />
+    <h1 class="fw-bold text-danger mb-3">
+        <i class="bi bi-shield-lock-fill"></i> Access Denied
+    </h1>
+    <p class="lead text-muted mb-4">
+        You do not have permission to view this page.<br />
+        Please contact an administrator if you believe this is an error.
+    </p>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary rounded-pill px-4">
+        <i class="bi bi-house-door-fill me-1"></i> Return Home
+    </a>
+</div>
+
+@section Scripts {
+    <script>
+        // Optional: fade in animation
+        document.querySelector('div.container').style.opacity = 0;
+        setTimeout(() => {
+            document.querySelector('div.container').style.transition = 'opacity 0.6s';
+            document.querySelector('div.container').style.opacity = 1;
+        }, 100);
+    </script>
+}
+

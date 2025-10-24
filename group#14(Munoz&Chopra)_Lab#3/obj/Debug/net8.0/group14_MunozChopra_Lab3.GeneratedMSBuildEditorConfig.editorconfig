@@ -48,8 +48,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/schop/OneDrive/Documents/Downloads/group-14-Munoz-Chopra-_Lab-3-main/group-14-Munoz-Chopra-_Lab-3-main/group\#14(Munoz&Chopra)_Lab\#3/Views/Episode/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXBpc29kZVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/schop/OneDrive/Documents/Downloads/group-14-Munoz-Chopra-_Lab-3-main/group-14-Munoz-Chopra-_Lab-3-main/group\#14(Munoz&Chopra)_Lab\#3/Views/Episode/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXBpc29kZVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/schop/OneDrive/Documents/Downloads/group-14-Munoz-Chopra-_Lab-3-main/group-14-Munoz-Chopra-_Lab-3-main/group\#14(Munoz&Chopra)_Lab\#3/Views/Episode/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXBpc29kZVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/schop/OneDrive/Documents/Downloads/group-14-Munoz-Chopra-_Lab-3-main/group-14-Munoz-Chopra-_Lab-3-main/group\#14(Munoz&Chopra)_Lab\#3/Views/Episode/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXBpc29kZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/schop/OneDrive/Documents/Downloads/group-14-Munoz-Chopra-_Lab-3-main/group-14-Munoz-Chopra-_Lab-3-main/group\#14(Munoz&Chopra)_Lab\#3/Views/Home/Index.cshtml]
@@ -66,6 +78,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/schop/OneDrive/Documents/Downloads/group-14-Munoz-Chopra-_Lab-3-main/group-14-Munoz-Chopra-_Lab-3-main/group\#14(Munoz&Chopra)_Lab\#3/Views/Podcast/Subscriptions.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9kY2FzdFxTdWJzY3JpcHRpb25zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/schop/OneDrive/Documents/Downloads/group-14-Munoz-Chopra-_Lab-3-main/group-14-Munoz-Chopra-_Lab-3-main/group\#14(Munoz&Chopra)_Lab\#3/Views/Shared/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEFjY2Vzc0RlbmllZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/schop/OneDrive/Documents/Downloads/group-14-Munoz-Chopra-_Lab-3-main/group-14-Munoz-Chopra-_Lab-3-main/group\#14(Munoz&Chopra)_Lab\#3/Views/Shared/Error.cshtml]

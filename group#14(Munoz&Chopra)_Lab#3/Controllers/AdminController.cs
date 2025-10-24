@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using group_14_Munoz_Chopra__Lab_3.Data;
 using group_14_Munoz_Chopra__Lab_3.Filters;
+using group_14_Munoz_Chopra__Lab_3.Models;
 
 namespace group_14_Munoz_Chopra__Lab_3.Controllers
 {
-    [AdminOnly] // ✅ Restrict access to admins
+    [AdminOnly] // ✅ Restrict access to Admins
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -43,6 +44,7 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             return View(users); // Views/Admin/Users.cshtml
         }
 
+        // ✅ Update Role (int fixed + TempData)
         [HttpPost]
         public IActionResult SetRole(int userId, string role)
         {
@@ -52,9 +54,12 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
 
             user.Role = role;
             _db.SaveChanges();
+
+            TempData["Message"] = $"✅ Role for {user.Username} updated to {role}.";
             return RedirectToAction(nameof(Users));
         }
 
+        // ✅ Delete User (int fixed + TempData)
         [HttpPost]
         public IActionResult DeleteUser(int userId)
         {
@@ -64,6 +69,8 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
 
             _db.Users.Remove(user);
             _db.SaveChanges();
+
+            TempData["Message"] = $"🗑️ User {user.Username} deleted successfully.";
             return RedirectToAction(nameof(Users));
         }
 
@@ -90,6 +97,7 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             return View(list); // Views/Admin/Episodes.cshtml
         }
 
+        // ✅ Update Episode Views
         [HttpPost]
         public IActionResult UpdateViews(int episodeId, int views)
         {
@@ -99,9 +107,12 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
 
             episode.NumberOfViews = views;
             _db.SaveChanges();
+
+            TempData["Message"] = $"👁️ Views for '{episode.Title}' updated to {views}.";
             return RedirectToAction(nameof(Episodes));
         }
 
+        // ✅ Delete Episode
         [HttpPost]
         public IActionResult DeleteEpisode(int episodeId)
         {
@@ -111,10 +122,12 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
 
             _db.Episodes.Remove(episode);
             _db.SaveChanges();
+
+            TempData["Message"] = $"🗑️ Episode '{episode.Title}' deleted successfully.";
             return RedirectToAction(nameof(Episodes));
         }
 
-        // ✅ View Popular Episodes
+        // ✅ Popular Episodes
         public IActionResult Popular()
         {
             var top = _db.Episodes
@@ -125,7 +138,7 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             return View(top); // Views/Admin/Popular.cshtml
         }
 
-        // ✅ View Most Recent Episodes
+        // ✅ Most Recent Episodes
         public IActionResult Recent()
         {
             var recent = _db.Episodes

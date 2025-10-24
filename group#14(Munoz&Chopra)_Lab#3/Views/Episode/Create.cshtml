@@ -1,0 +1,33 @@
+﻿@model group_14_Munoz_Chopra__Lab_3.Models.Episode
+@{
+    ViewData["Title"] = "Add New Episode";
+}
+
+<div class="container mt-4">
+    <h2 class="fw-bold text-primary mb-4">Add New Episode</h2>
+
+    <form asp-action="Create" enctype="multipart/form-data" method="post">
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input asp-for="Title" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Podcast</label>
+            <select asp-for="PodcastID" class="form-select" asp-items="@(new SelectList(ViewBag.Podcasts, "PodcastID", "Title"))"></select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Duration (mins)</label>
+            <input asp-for="DurationMinutes" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Audio File</label>
+            <input type="file" name="audioFile" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Episode</button>
+    </form>
+</div>
+
