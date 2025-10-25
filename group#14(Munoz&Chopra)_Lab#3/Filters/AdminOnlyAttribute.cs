@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using group_14_Munoz_Chopra__Lab_3.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using group_14_Munoz_Chopra__Lab_3.Data;
 using System;
@@ -6,7 +7,6 @@ using System.Linq;
 
 namespace group_14_Munoz_Chopra__Lab_3.Filters
 {
-    // ✅ Custom attribute to restrict actions to admins only
     public class AdminOnlyAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext context)
@@ -28,7 +28,7 @@ namespace group_14_Munoz_Chopra__Lab_3.Filters
             // If not admin → forbid access
             if (user == null || !string.Equals(user.Role, "Admin", StringComparison.OrdinalIgnoreCase))
             {
-                context.Result = new ForbidResult();
+                context.Result = new RedirectToActionResult("AccessDenied", "Account", null);
                 return;
             }
 

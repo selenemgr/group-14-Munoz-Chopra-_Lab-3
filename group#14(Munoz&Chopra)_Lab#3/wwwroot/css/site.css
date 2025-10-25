@@ -1,13 +1,17 @@
-﻿/* =========================================
-   🌐 General HTML & Body Styling
-========================================= */
+﻿
 html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
     font-size: 14px;
     position: relative;
     min-height: 100%;
 }
 
 @media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
     html {
         font-size: 16px;
     }
@@ -20,9 +24,6 @@ body {
     font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
 }
 
-/* =========================================
-   🎯 Form & Button Focus Styles
-========================================= */
 .btn:focus,
 .btn:active:focus,
 .btn-link.nav-link:focus,
@@ -32,9 +33,6 @@ body {
     outline: none;
 }
 
-/* =========================================
-   🧭 Navbar Styling
-========================================= */
 .navbar {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     background-color: #ffffff;
@@ -62,9 +60,6 @@ body {
         color: #0d6efd !important;
     }
 
-/* =========================================
-   📦 Login & Register Form Styling
-========================================= */
 .login-card,
 .register-card {
     background: #fff;
@@ -117,9 +112,6 @@ body {
         transform: translateY(-1px);
     }
 
-/* =========================================
-   🎧 Podcast Logo Styles
-========================================= */
 .podcast-image {
     width: 100px;
     height: 100px;
@@ -129,9 +121,6 @@ body {
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* =========================================
-   🦶 Footer
-========================================= */
 footer {
     background-color: #ffffff;
     border-top: 1px solid #dee2e6;
@@ -141,9 +130,6 @@ footer {
     font-size: 0.9rem;
 }
 
-/* =========================================
-   📱 Responsive Adjustments
-========================================= */
 @media (max-width: 576px) {
     .login-card,
     .register-card {

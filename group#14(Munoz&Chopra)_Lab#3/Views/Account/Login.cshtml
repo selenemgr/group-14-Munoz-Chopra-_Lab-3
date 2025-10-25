@@ -5,10 +5,10 @@
 <div class="container d-flex justify-content-center align-items-center min-vh-100 bg-light">
     <div class="card shadow-lg p-4" style="max-width: 420px; width: 100%; border-radius: 20px;">
         <div class="text-center">
-    <img src="~/images/podcast.jpg" alt="Podcast Icon" class="podcast-image" />
-    <h2 class="text-primary fw-bold">Welcome Back!</h2>
-    <p class="text-muted small">Login to continue your Podcast journey 🎧</p>
-</div>
+            <img src="~/public/podcast.jpg" alt="Podcast Icon" class="podcast-image" />
+            <h2 class="text-primary fw-bold">Welcome Back!</h2>
+            <p class="text-muted small">Login to continue your Podcast journey 🎧</p>
+        </div>
 
         <form asp-action="Login" method="post">
             <div class="mb-3">
@@ -28,20 +28,16 @@
 
         @if (ViewBag.Error != null)
         {
-                <div class="alert alert-danger text-center mt-3 mb-0 rounded-3">
+            <div class="alert alert-danger text-center mt-3 mb-0 rounded-3">
                 @ViewBag.Error
-                </div>
+            </div>
         }
 
-        <div class="text-center mt-4">
+        <footer class="text-center mt-4">
             <p class="text-muted mb-0">
                 Don’t have an account?
                 <a asp-action="Register" class="fw-semibold text-decoration-none text-primary">Register here</a>
             </p>
-        </div>
-
-        <footer class="text-center mt-4 small text-muted">
-            &copy; 2025 - group_14_Munoz_Chopra_Lab_3
         </footer>
     </div>
 </div>

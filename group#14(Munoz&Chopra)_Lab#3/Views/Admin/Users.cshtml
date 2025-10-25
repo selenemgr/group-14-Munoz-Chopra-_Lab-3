@@ -4,11 +4,14 @@
 }
 
 <div class="container py-4">
+    <a asp-controller="Admin" asp-action="Index" class="btn btn-outline-secondary mb-4">
+        <i class="bi bi-arrow-left-circle"></i> Back to Admin Dashboard
+    </a>
     <h2 class="fw-bold text-primary mb-4">
         <i class="bi bi-people-fill me-2"></i>Manage Users
     </h2>
 
-    <!-- ✅ Add this block right below the heading -->
+    <!-- Confirmation Message -->
     @if (TempData["Message"] != null)
     {
         <div class="alert alert-success">@TempData["Message"]</div>
