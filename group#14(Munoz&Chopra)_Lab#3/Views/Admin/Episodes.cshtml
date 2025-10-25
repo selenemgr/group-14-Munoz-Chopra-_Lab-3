@@ -23,6 +23,11 @@
         </div>
     </form>
 
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">@TempData["Message"]</div>
+    }
+
     @if (!Model.Any())
     {
             <div class="alert alert-info">No episodes found.</div>
@@ -49,7 +54,7 @@
                                 <td>@episode.Podcast?.Creator?.Username</td>
                                 <td>@episode.ReleaseDate.ToShortDateString()</td>
                                 <td>
-                            <form asp-action="UpdateViews" method="post" class="d-flex align-items-center" onsubmit="return confirm('Views Updated!');">
+                            <form asp-action="UpdateViews" method="post" class="d-flex align-items-center">
                                         <input type="hidden" name="episodeId" value="@episode.EpisodeID" />
                                         <input type="number" name="views" value="@episode.NumberOfViews" min="0" class="form-control form-control-sm me-2" style="width:100px;" />
                                         <button type="submit" class="btn btn-sm btn-outline-success">Update</button>

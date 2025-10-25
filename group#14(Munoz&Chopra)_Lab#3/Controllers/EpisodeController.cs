@@ -18,9 +18,6 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             _dbContext = dbContext;
         }
 
-        // =========================================================
-        // SHOW ALL EPISODES
-        // =========================================================
         public async Task<IActionResult> Index()
         {
             var episodes = await _context.Episodes
@@ -31,9 +28,6 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             return View(episodes);
         }
 
-        // =========================================================
-        // EPISODE DETAILS (with comments)
-        // =========================================================
         public async Task<IActionResult> Details(int id)
         {
             var username = HttpContext.Session.GetString("Username");
@@ -47,11 +41,10 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             if (episode == null || episode.Podcast == null)
                 return NotFound();
 
-            // ✅ Fetch comments from DynamoDB by EpisodeID
-            // ✅ Safer DynamoDB fetch (works even if EpisodeID isn’t the hash key)
+
             var comments = await _dbContext.ScanAsync<Comment>(
                 new List<ScanCondition> {
-        new ScanCondition("EpisodeID", Amazon.DynamoDBv2.DocumentModel.ScanOperator.Equal, episode.EpisodeID)
+            new ScanCondition("EpisodeID", Amazon.DynamoDBv2.DocumentModel.ScanOperator.Equal, episode.EpisodeID)
                 }).GetRemainingAsync();
 
 
@@ -87,9 +80,6 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             return View(model);
         }
 
-        // =========================================================
-        // ADD COMMENT (DynamoDB)
-        // =========================================================
         [HttpPost]
         public async Task<IActionResult> AddComment(int episodeId, string text)
         {
@@ -117,9 +107,6 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             return RedirectToAction("Details", new { id = episodeId });
         }
 
-        // =========================================================
-        // ✅ EDIT COMMENT (within 24 hours)
-        // =========================================================
         [HttpPost]
         public async Task<IActionResult> EditComment(int commentId, int episodeId, string text)
         {
@@ -127,15 +114,17 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             if (string.IsNullOrEmpty(username))
                 return RedirectToAction("Login", "Account");
 
-            // find the current user
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
             if (user == null) return BadRequest("User not found.");
 
-            // load the comment from DynamoDB
-            var comment = await _dbContext.LoadAsync<Comment>(commentId, episodeId);
-            if (comment == null) return NotFound();
+            // Load all comments for the episode
+            var comments = await _dbContext.QueryAsync<Comment>(episodeId).GetRemainingAsync();
 
-            // allow editing only if same user and within 24 hours
+            // Find the specific comment by CommentID
+            var comment = comments.FirstOrDefault(c => c.CommentID == commentId);
+            if (comment == null)
+                return NotFound();
+
             if (comment.UserID == user.UserID && (DateTime.UtcNow - comment.Timestamp).TotalHours <= 24)
             {
                 comment.Text = text;
@@ -150,9 +139,7 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             return RedirectToAction("Details", new { id = episodeId });
         }
 
-        // =========================================================
-        // CREATE EPISODE
-        // =========================================================
+
         [HttpGet]
         public IActionResult Create(int? podcastId)
         {
@@ -189,13 +176,9 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             _context.Episodes.Add(episode);
             await _context.SaveChangesAsync();
 
-            // ✅ Redirect to the podcast’s details page
             return RedirectToAction("Details", "Podcast", new { id = episode.PodcastID });
         }
 
-        // =========================================================
-        // EDIT EPISODE
-        // =========================================================
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -232,13 +215,9 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
 
             await _context.SaveChangesAsync();
 
-            // ✅ Redirect back to podcast details
             return RedirectToAction("Details", "Podcast", new { id = episode.PodcastID });
         }
 
-        // =========================================================
-        // DELETE EPISODE
-        // =========================================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
@@ -254,9 +233,6 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             return RedirectToAction("Details", "Podcast", new { id = podcastId });
         }
 
-        // =========================================================
-        // INCREMENT VIEW COUNT
-        // =========================================================
         [HttpPost]
         public async Task<IActionResult> IncrementViews(int id)
         {

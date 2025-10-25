@@ -45,15 +45,6 @@
             <i class="bi bi-eye-fill me-1"></i> Views: @Model.NumberOfViews
         </div>
     </div>
-    <!-- Episode Stats -->
-    <div class="d-flex flex-wrap gap-3 mb-4">
-        <div class="badge bg-success-subtle border text-success px-3 py-2">
-            <i class="bi bi-play-circle-fill me-1"></i> Plays: @Model.PlayCount
-        </div>
-        <div class="badge bg-primary-subtle border text-primary px-3 py-2">
-            <i class="bi bi-eye-fill me-1"></i> Views: @Model.NumberOfViews
-        </div>
-    </div>
 
     <!-- Comments Section -->
     <div class="card shadow-sm border-0 mb-4">
@@ -61,14 +52,8 @@
             <h4 class="fw-semibold mb-3">
                 <i class="bi bi-chat-left-dots-fill text-primary me-2"></i> Comments
             </h4>
-    <!-- Comments Section -->
-    <div class="card shadow-sm border-0 mb-4">
-        <div class="card-body">
-            <h4 class="fw-semibold mb-3">
-                <i class="bi bi-chat-left-dots-fill text-primary me-2"></i> Comments
-            </h4>
 
-            <!-- ✅ Feedback Alert -->
+            <!-- Feedback Alert -->
             @if (TempData["Message"] != null)
             {
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -100,19 +85,33 @@
                                 <small class="text-muted">@comment.Timestamp.ToLocalTime().ToString("MMM dd, yyyy hh:mm tt")</small>
                             </div>
 
-                            <p class="mt-1 mb-0 text-secondary">@comment.Text</p>
+                            <div class="d-flex justify-content-between">
+                                <p class="mt-1 mb-0 text-secondary">@comment.Text</p>
 
-                            @if (canEdit)
-                            {
-                                <form asp-action="EditComment" method="post" class="mt-2 d-flex">
-                                    <input type="hidden" name="commentId" value="@comment.CommentID" />
-                                    <input type="hidden" name="episodeId" value="@Model.EpisodeID" />
-                                    <input name="text" class="form-control me-2" value="@comment.Text" />
-                                    <button type="submit" class="btn btn-sm btn-outline-success">
+                                @if (canEdit)
+                                {
+                                    <button type="button"
+                                            class="btn btn-sm btn-outline-secondary edit-btn"
+                                            data-comment-id="@comment.CommentID">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                }
+                            </div>
+
+                            <form asp-controller="Episodes" asp-action="EditComment" method="post" class="mt-2 edit-form d-none" id="edit-form-@comment.CommentID">
+                                <input type="hidden" name="commentId" value="@comment.CommentID" />
+                                <input type="hidden" name="episodeId" value="@Model.EpisodeID" />
+                                <div class="d-flex">
+                                    <textarea name="text" class="form-control me-2">@comment.Text</textarea>
+                                    <button type="submit" class="btn btn-sm btn-outline-success me-2">
                                         <i class="bi bi-check-circle me-1"></i> Save
                                     </button>
-                                </form>
-                            }
+                                    <button type="button" class="btn btn-sm btn-outline-secondary cancel-btn" data-comment-id="@comment.CommentID">
+                                        <i class="bi bi-x-circle"></i> Cancel
+                                    </button>
+                                </div>
+                            </form>
+
                         </div>
                     }
                 </div>
@@ -126,7 +125,7 @@
 </div>
 
 @section Scripts {
-    <!-- ✅ Auto-hide alert after 4 seconds -->
+    <!-- Auto-hide alert after 4 seconds -->
     <script>
         setTimeout(() => {
             const alert = document.querySelector('.alert-success');
@@ -135,5 +134,30 @@
                 setTimeout(() => alert.remove(), 300);
             }
         }, 4000);
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Toggle edit form visibility when Edit button is clicked
+            document.querySelectorAll(".edit-btn").forEach(button => {
+                button.addEventListener("click", function () {
+                    const id = this.getAttribute("data-comment-id");
+                    const form = document.getElementById(`edit-form-${id}`);
+                    if (form.classList.contains("d-none")) {
+                        form.classList.remove("d-none"); // show form
+                    } else {
+                        form.classList.add("d-none"); // hide form
+                    }
+                });
+            });
+
+            // Cancel button just hides the form
+            document.querySelectorAll(".cancel-btn").forEach(button => {
+                button.addEventListener("click", function () {
+                    const id = this.getAttribute("data-comment-id");
+                    const form = document.getElementById(`edit-form-${id}`);
+                    form.classList.add("d-none"); // hide form
+                });
+            });
+        });
     </script>
 }

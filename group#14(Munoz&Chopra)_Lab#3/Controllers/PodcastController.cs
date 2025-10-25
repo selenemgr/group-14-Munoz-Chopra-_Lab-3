@@ -106,24 +106,6 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
 
             return RedirectToAction("Details", new { id = podcastId });
         }
-        public IActionResult Index()
-        {
-            var podcasts = _context.Podcasts
-                .Include(p => p.Creator)
-                .Include(p => p.Subscriptions)
-                .Select(p => new PodcastViewModel
-                {
-                    PodcastID = p.PodcastID,
-                    Title = p.Title,
-                    Description = p.Description,
-                    CreatorUsername = p.Creator.Username,
-                    SubscriberCount = p.Subscriptions.Count()
-                })
-                .ToList();
-
-            return View(podcasts);
-        }
-
 
         public IActionResult Subscriptions()
         {

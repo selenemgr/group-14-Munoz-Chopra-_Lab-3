@@ -32,7 +32,6 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             var podcasts = _context.Podcasts
               .Include(p => p.Creator)
               .Include(p => p.Subscriptions) 
-              .Where(p => p.Creator != null && p.Creator.Role.ToLower() == "podcaster")
               .Select(p => new PodcastViewModel
               {
                   PodcastID = p.PodcastID,

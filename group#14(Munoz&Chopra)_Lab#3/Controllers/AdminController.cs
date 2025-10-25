@@ -2,9 +2,6 @@
 using group_14_Munoz_Chopra__Lab_3.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using group_14_Munoz_Chopra__Lab_3.Data;
-using group_14_Munoz_Chopra__Lab_3.Filters;
-using group_14_Munoz_Chopra__Lab_3.Models;
 
 namespace group_14_Munoz_Chopra__Lab_3.Controllers
 {
@@ -94,7 +91,6 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             return View(list);
         }
 
-        // ✅ Update Episode Views
         [HttpPost]
         public IActionResult UpdateViews(int episodeId, int views)
         {
@@ -109,7 +105,6 @@ namespace group_14_Munoz_Chopra__Lab_3.Controllers
             return RedirectToAction(nameof(Episodes));
         }
 
-        // ✅ Delete Episode
         [HttpPost]
         public IActionResult DeleteEpisode(int episodeId)
         {
